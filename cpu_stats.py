@@ -1,5 +1,6 @@
 import time
 import os
+import json
 
 def cpu_usage(l):
 
@@ -8,20 +9,20 @@ def cpu_usage(l):
     #run $nproc to find number of CPUs
     number_cpus = 1
 
-    stats = {'total_percent_consumed' : 0.0, 
-             'total_consumed_user_cycles' : 0,
-             'total_consumed_system_cycles' : 0}
-
     #check for an empty list of PIDs
     if len(l) == 0:
-        #do nothing and return out
-        return
+        #do nothing and return
+        return None
+
+    stats = {'total_percent_consumed' : 0.0,
+             'total_consumed_user_cycles' : 0,
+             'total_consumed_system_cycles' : 0}
 
     for pid in l:
         cpu_current = get_cpu_proctable(pid)
         cpu_prior = get_cpu_prior_file(pid)
 
-        if ('timestamp' in cpu_current) and ('timestamp' in cpu_prior):
+        if ('timestamp' in cpu_current) and ('timestamp' in cpu_prior) and (len(stats) != 0):
             elapsed_time_sec = cpu_current['timestamp'] - cpu_prior['timestamp']
             consumed_user_cycles = cpu_current['user'] - cpu_prior['user']
             consumed_system_cycles = cpu_current['system'] - cpu_prior['system']
@@ -35,10 +36,11 @@ def cpu_usage(l):
             stats['total_consumed_system_cycles'] += consumed_system_cycles
 
         else:
-            #empty out the stats dictionary since there is nothing to report
+            #not able to accurately calculate total_percent_consumed because 
+            #either the cpu_current or cpu_prior for the PID is not found.
+            #therefore set stats to empty dictionary.
             stats = {}
 
-        #write a new cpu file
         write_cpu_file(pid,cpu_current)
 
     #end for loop
@@ -78,23 +80,18 @@ def get_cpu_prior_file(i):
 
     if os.path.isfile(cpu_file):
         with open(cpu_file, 'r') as f:
-            content = f.readline()
-        parsed = content.split()
-        stats['timestamp'] = float(parsed[0])
-        stats['user'] = int(parsed[1])
-        stats['system'] = int(parsed[2])
-
+            stats = json.load(f)
+    print stats
     return stats
 
 
-def write_cpu_file(i,d):
+def write_cpu_file(i,dict_cpu_stats):
 
     cpu_file = '/tmp/' + str(i)
         
-    if ('timestamp' in d): 
+    if ('timestamp' in dict_cpu_stats): 
         f = open(cpu_file, 'w')
-        f.write (str(d['timestamp']) + ' ' + str(d['user']) 
-                                     + ' ' +str(d['system']))
+        f.write (json.dumps(dict_cpu_stats))
         f.close()
 
     return
