@@ -28,9 +28,6 @@ run program:
 sample output:
 ```
 ('apache', {'rss_ave_mb': 3, 'workers': 3, 'vms_ave_mb': 224}, {})
-=================================
 ('apache', {'rss_ave_mb': 3, 'workers': 3, 'vms_ave_mb': 224}, {'total_consumed_user_cycles': 764, 'total_consumed_system_cycles': 1201, 'total_percent_consumed': 64.27766263206821})
-=================================
 ('apache', {'rss_ave_mb': 3, 'workers': 3, 'vms_ave_mb': 224}, {'total_consumed_user_cycles': 748, 'total_consumed_system_cycles': 1238, 'total_percent_consumed': 66.01126687283042})
-=================================
 ```
