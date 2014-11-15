@@ -1,19 +1,23 @@
 import sys
 import time
+import argparse
+
 import get_pids
 import memory_stats
 import cpu_stats
 
-#process = 'apache'
+parser = argparse.ArgumentParser()
+parser.add_argument("process", help="name of worker processes to monitor")
+parser.add_argument("frequency", type=int, help="sample frequency in seconds")
+args = parser.parse_args()
 
-process = str(sys.argv[1])
+process_name = args.process
+frequency_sec = args.frequency
 
 while True:
-    list_pids = get_pids.get_pids(process)
-    # print (list_pids)
+    list_pids = get_pids.get_pids(process_name)
     mem =  memory_stats.memory_average(list_pids)
     cpu = cpu_stats.cpu_usage(list_pids)
-    print (process, mem, cpu )
-    print '================================='
-    time.sleep(30)
+    print (process_name, mem, cpu)
+    time.sleep(frequency_sec)
 
