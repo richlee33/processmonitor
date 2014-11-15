@@ -41,6 +41,7 @@ def cpu_usage(l):
             #therefore set stats to empty dictionary.
             stats = {}
 
+        #write out current CPU stats so its available next time
         write_cpu_file(pid,cpu_current)
 
     #end for loop
@@ -81,7 +82,7 @@ def get_cpu_prior_file(i):
     if os.path.isfile(cpu_file):
         with open(cpu_file, 'r') as f:
             stats = json.load(f)
-    print stats
+    
     return stats
 
 
