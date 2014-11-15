@@ -11,24 +11,22 @@ def memory_average(l):
     number_workers= len(l)
 
     if number_workers == 0:
-        #do nothing and return
-        return
+        #do nothing and return None
+        return None
 
     for pid in l:
-         p = psutil.Process(pid)
-         memory_rss_total = memory_rss_total + p.memory_info_ex().rss 
-         memory_vms_total = memory_vms_total + p.memory_info_ex().vms
-  
+    #TODO: check or invalid PID
+        p = psutil.Process(pid)
+        memory_rss_total = memory_rss_total + p.memory_info_ex().rss 
+        memory_vms_total = memory_vms_total + p.memory_info_ex().vms
+    #end for loop
+ 
     memory_rss_average_mb = (memory_rss_total/number_workers) / (1024**2) 
     memory_vms_average_mb = (memory_vms_total/number_workers) / (1024**2) 
 
-#    print 'number worker processes=' + str(number_workers)
-#    print 'memory rss average MB=' + str(memory_rss_average_mb)
-#    print 'memory vms average MB=' + str(memory_vms_average_mb)
-
-    memory_stats = {'workers':number_workers, 'rss_ave_mb':memory_rss_average_mb, 
+    memory_stats = {'workers':number_workers, 
+                    'rss_ave_mb':memory_rss_average_mb, 
                     'vms_ave_mb':memory_vms_average_mb}
 
     return memory_stats
-
 

@@ -23,7 +23,7 @@ set up environment:
 `pip install -r requirements.txt`  
 
 run program:  
-`python process_monitor.py apache`  
+`python process_monitor.py apache 30`  
 
 sample output:
 ```
