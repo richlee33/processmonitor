@@ -38,6 +38,7 @@ sample output:
 considerations 
 --------------
 
-if the cpu value in proces_monitor.py constantly returns {} then most likely the worker processes
-are stopping and starting as or more frequently than sampling frequency.  increase the command line frequency value.  its normal for a new execution of this program to have the cpu value return {} once in the beginning.  
+if the cpu value in proces_monitor.py constantly returns {} then most likely the worker processes are stopping and starting or more frequently than the sampling rate.  
+change the frequency sampling rate to a lower number.  
+its normal for a new execution of this program to have the cpu value return {} once in the beginning.  
 
