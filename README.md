@@ -8,7 +8,7 @@ how it works
 ------------
 worker PIDs are found for the process name passed in via the command line.  
 the resident set size and the virtual memory size is the average of those values from the worker PIDs.
-the total cpu percent consumed is the sum of all the worker PIDs cpu percent useage.  
+the total cpu percent consumed is the sum of all the worker PIDs cpu percent usage.  
 the percent cpu consumed is calculated for each PID by examining the system and user cpu cycles consumed at 2 points in time.  
 in order to calculate cpu percent used, a small file is written on disk for each worker PID.  
 the next time the cpu_usage function is called, it compares the current number of cpu cycles consumed with the prior number of cpu cycles consumed found on disk.
@@ -22,7 +22,7 @@ set up environment:
 `source bin/activate`  
 `pip install -r requirements.txt`  
 
-find number of CPUs on system and set in cpu_stats.py
+find number of CPUs on system and set in cpu_stats.py  
 `$nproc`
 
 run program:  
