@@ -26,7 +26,7 @@ find number of CPUs on system and set in cpu_stats.py
 `$nproc`
 
 run program:  
-`python process_monitor.py apache 30`  
+`python process_monitor.py apache 20`  
 
 sample output:
 ```
