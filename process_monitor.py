@@ -1,5 +1,6 @@
 import sys
 import time
+from datetime import datetime
 import argparse
 
 import get_pids
@@ -15,9 +16,10 @@ process_name = args.process
 frequency_sec = args.frequency
 
 while True:
+    current_time = str(datetime.now())
     list_pids = get_pids.get_pids(process_name)
     mem =  memory_stats.memory_average(list_pids)
     cpu = cpu_stats.cpu_usage(list_pids)
-    print (process_name, mem, cpu)
+    print current_time, (process_name, mem, cpu)
     time.sleep(frequency_sec)
 

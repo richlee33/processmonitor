@@ -3,6 +3,10 @@ import os
 import json
 
 def cpu_usage(l):
+#calculates combined percent cpu used by PIDs.
+#input: list of PIDs which are the worker processes.
+#output: dictionary containing total percent CPU used and total system and
+#        user cpu cycles consumed.
 
     cycles_per_sec = 100
 
@@ -11,7 +15,7 @@ def cpu_usage(l):
 
     #check for an empty list of PIDs
     if len(l) == 0:
-        #do nothing and return
+        #do nothing and return 
         return None
 
     stats = {'total_percent_consumed' : 0.0,
@@ -23,6 +27,7 @@ def cpu_usage(l):
         cpu_prior = get_cpu_prior_file(pid)
 
         if ('timestamp' in cpu_current) and ('timestamp' in cpu_prior) and (len(stats) != 0):
+
             elapsed_time_sec = cpu_current['timestamp'] - cpu_prior['timestamp']
             consumed_user_cycles = cpu_current['user'] - cpu_prior['user']
             consumed_system_cycles = cpu_current['system'] - cpu_prior['system']
