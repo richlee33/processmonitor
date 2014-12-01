@@ -15,10 +15,15 @@ def memory_average(l):
         return None
 
     for pid in l:
-    #TODO: check or invalid PID
-        p = psutil.Process(pid)
-        memory_rss_total = memory_rss_total + p.memory_info_ex().rss 
-        memory_vms_total = memory_vms_total + p.memory_info_ex().vms
+        try:
+            p = psutil.Process(pid)
+        except psutil.NoSuchProcess:
+            print 'invalid PID found when calculating memory'
+            return []
+        else:
+            memory_rss_total = memory_rss_total + p.memory_info_ex().rss
+            memory_vms_total = memory_vms_total + p.memory_info_ex().vms
+
     #end for loop
  
     memory_rss_average_mb = (memory_rss_total/number_workers) / (1024**2) 
