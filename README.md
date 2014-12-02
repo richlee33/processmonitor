@@ -42,3 +42,9 @@ if the cpu value in proces_monitor.py constantly returns {} then most likely the
 change the frequency sampling rate to a lower number.  
 its normal for a new execution of this program to have the cpu value return {} once in the beginning.  
 
+
+run tests 
+------------
+`cd processmonitor`  
+`py.test ./tests/`  
+
