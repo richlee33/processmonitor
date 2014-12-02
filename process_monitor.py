@@ -1,9 +1,9 @@
 import sys
 import time
-from datetime import datetime
+import datetime
 import argparse
 
-import get_pids
+from daemonprocess import DaemonProcess
 import memory_stats
 import cpu_stats
 
@@ -16,8 +16,9 @@ process_name = args.process
 frequency_sec = args.frequency
 
 while True:
-    current_time = str(datetime.now())
-    list_pids = get_pids.get_pids(process_name)
+    current_time = str(datetime.datetime.now())
+    dp = DaemonProcess(process_name)
+    list_pids = dp.find_worker_pid()
     mem =  memory_stats.memory_average(list_pids)
     cpu = cpu_stats.cpu_usage(list_pids)
     print current_time, (process_name, mem, cpu)
