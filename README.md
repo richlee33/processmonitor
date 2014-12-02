@@ -46,5 +46,5 @@ its normal for a new execution of this program to have the cpu value return {} o
 run tests 
 ------------
 `cd processmonitor`  
-`py.test ./tests/`  
+`py.test ./test/`  
 
