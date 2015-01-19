@@ -22,9 +22,6 @@ set up environment:
 `source bin/activate`  
 `pip install -r requirements.txt`  
 
-find number of CPUs on system and set in cpu_stats.py  
-`$nproc`
-
 run program:  
 `python process_monitor.py apache 20`  
 

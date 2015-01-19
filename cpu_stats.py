@@ -2,6 +2,8 @@ import time
 import os
 import json
 
+import psutil
+
 def cpu_usage(l):
 #calculates combined percent cpu used by PIDs.
 #input: list of PIDs which are the worker processes.
@@ -10,8 +12,8 @@ def cpu_usage(l):
 
     cycles_per_sec = 100
 
-    #run $nproc to find number of CPUs
-    number_cpus = 1
+    #find number of CPUs
+    number_cpus = psutil.cpu_count()
 
     #check for an empty list of PIDs
     if len(l) == 0:
