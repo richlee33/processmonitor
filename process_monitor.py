@@ -19,6 +19,8 @@ while True:
     current_time = str(datetime.datetime.now())
     dp = DaemonProcess(process_name)
     list_pids = dp.find_worker_pid()
+    if list_pids is None:
+        break
     mem =  memory_stats.memory_average(list_pids)
     cpu = cpu_stats.cpu_usage(list_pids)
     print current_time, (process_name, mem, cpu)

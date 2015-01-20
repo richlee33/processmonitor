@@ -59,6 +59,7 @@ class DaemonProcess:
 
         if len(worker_pid) == 0:
             print 'daemon PID ' + str(daemon_pid) + ' has no worker processes'
+            worker_pid = None
 
         return worker_pid
 

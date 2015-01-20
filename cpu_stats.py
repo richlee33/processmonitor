@@ -66,7 +66,7 @@ def get_cpu_proctable(i):
     if os.path.isfile(proc_file):
         current_time = time.time()
         with open(proc_file, 'r') as f:
-            content = f.readline()
+            content = f.read()
         parsed = content.split()
         stats['timestamp'] = current_time 
         stats['user'] = int(parsed[13])
